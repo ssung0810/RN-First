@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import styled from 'styled-components/native';
 import Btn from './HookButton';
 
@@ -20,21 +20,29 @@ const Form = () => {
     const [email, setEmail] = useState('');
     let count = 0;
 
+    const nameRef = useRef(null);
+    const emailRef = useRef(null);
+
     useEffect(() => {
         console.log("-=-=-=-=-=-=-=-= Mount -=-=-=-=-=-=-=-=");
+        nameRef.current.focus();
         return () => console.log("-=-=-=-=-=-=-=-= UnMount -=-=-=-=-=-=-=-=");
     }, []);
-    
+
     useEffect(() => {
         console.log('ing');
     }, [email]);
+
+    const onSubmit = () => {
+        alert('submit');
+    };
 
     return (
         <>
             <StyledText>name: {name}</StyledText>
             <StyledText>email: {email}</StyledText>
-            <StyledInput value={name} onChangeText={setName} placeholder='name' />
-            <StyledInput value={email} onChangeText={setEmail} placeholder='name' />
+            <StyledInput value={name} onChangeText={setName} placeholder='name' ref={nameRef} returnKeyType="next" onSubmitEditing={() => emailRef.current.focus()} />
+            <StyledInput value={email} onChangeText={setEmail} placeholder='name' ref={emailRef} returnKeyType="done" onSubmitEditing={onSubmit} />
             <Btn title="count" onPress={() => count+1} />
         </>
     );
