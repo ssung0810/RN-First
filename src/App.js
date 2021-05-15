@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import styled, {ThemeProvider} from 'styled-components/native';
 import Counter from './components/Counter';
+import Btn from './components/HookButton';
+import Form from './components/Form';
 
 const Container = styled.View`
     flex: 1;
@@ -10,9 +12,14 @@ const Container = styled.View`
 `;
 
 export default function App() {
+  const [isVisible, setIsVisible] = useState(true);
   return (
     <Container>
-        <Counter></Counter>
+      <Btn
+        title='on/off' 
+        onPress={() => setIsVisible(prev => !prev)} 
+      />
+      {isVisible && <Form />}
     </Container>
   );
 }
