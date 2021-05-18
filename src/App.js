@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
+import React, {createContext} from 'react';
 import styled, {ThemeProvider} from 'styled-components/native';
-import Counter from './components/Counter';
-import Btn from './components/HookButton';
-import Form from './components/Form';
+import Navigation from './navigations';
 
 const Container = styled.View`
     flex: 1;
@@ -11,16 +9,14 @@ const Container = styled.View`
     justify-content: center;
 `;
 
+const StyledText = styled.Text`
+  font-size: 30px;
+  font-weight: 600;
+`;
+
 export default function App() {
-  const [isVisible, setIsVisible] = useState(true);
   return (
-    <Container>
-      <Btn
-        title='on/off' 
-        onPress={() => setIsVisible(prev => !prev)} 
-      />
-      {isVisible && <Form />}
-    </Container>
+    <Navigation /> 
   );
-}
+};
 
